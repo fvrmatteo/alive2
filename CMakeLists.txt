@@ -135,7 +135,7 @@ add_executable(alive
                "${CMAKE_BINARY_DIR}/tools/alive_lexer.cpp"
                "tools/alive_parser.cpp"
               )
-target_link_libraries(alive PRIVATE ${ALIVE_LIBS})
+target_link_libraries(alive PRIVATE ${ALIVE_LIBS} pthread)
 
 add_library(alive2 SHARED ${IR_SRCS} ${SMT_SRCS} ${TOOLS_SRCS} ${UTIL_SRCS} ${LLVM_UTIL_SRCS})
 
@@ -152,8 +152,8 @@ if (CYGWIN)
   set(CMAKE_SHARED_LINKER_FLAGS "-L${Z3_LIB_DIR} -lz3")
   file(COPY "${Z3_LIBRARIES}" DESTINATION "${PROJECT_BINARY_DIR}")
 else()
-  target_link_libraries(alive PRIVATE ${Z3_LIBRARIES})
-  target_link_libraries(alive2 PRIVATE ${Z3_LIBRARIES})
+  target_link_libraries(alive PRIVATE ${Z3_LIBRARIES} pthread)
+  target_link_libraries(alive2 PRIVATE ${Z3_LIBRARIES} pthread)
 endif()
 
 add_custom_target("check"

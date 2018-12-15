@@ -77,7 +77,7 @@ static void print_varval(ostream &s, State &st, const Model &m,
 }
 
 
-static void error(Errors &errs, State &src_state, State &tgt_state,
+void tools::error(Errors &errs, State &src_state, State &tgt_state,
                   const Result &r, bool print_var, const Value *var,
                   const Type &type,
                   const StateValue &src, const StateValue &tgt,
@@ -149,7 +149,7 @@ static void error(Errors &errs, State &src_state, State &tgt_state,
 }
 
 
-static expr preprocess(Transform &t, const set<expr> &qvars,
+expr tools::preprocess(Transform &t, const set<expr> &qvars,
                        const set<expr> &undef_qvars, expr && e) {
 
   // restrict type variable from taking disabled values
